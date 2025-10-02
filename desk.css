@@ -1,0 +1,37 @@
+body {
+  background-image: url(back.jpg);
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.CLI {
+  margin: 50px;
+  padding-top: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 15px;
+  background-image: url(cli.png);
+  background-size: contain;
+  color: white;
+  width: 577px;
+  height: 270px;
+  display: flex;    
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+.top {
+    width: 550px;
+    height: 20px;
+    display: flex;
+    gap: 10px;
+}
+.ipt {
+    width: 500px;
+    height: 250px;
+    outline: none;
+}

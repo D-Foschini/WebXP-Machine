@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebXP</title>
+    <link rel="stylesheet" href="desk.css" />
+  </head>
+  <body>
+    <div class="CLI">
+      <div class="top">
+        C:\Users\danie\FoschiniMachini.html>
+        <div class="ipt" id="div_cmd" contenteditable="true"></div>
+      </div>
+      <div class="resultado" id="div_result">testando</div>
+    </div>
+  </body>
+  <script>
+    const cmdDiv = document.getElementById("div_cmd");
+
+    cmdDiv.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const comando = cmdDiv.innerHTML.trim();
+        let decimal = comando.startsWith("dec");
+        let hexadecimal = comando.startsWith("hex");
+        let octal = comando.startsWith("oct");
+
+        let decimalfinal = comando.endsWith("dec");
+        let hexadecimalfinal = comando.endsWith("hex");
+        let octalfinal = comando.endsWith("oct");
+
+        if (decimal == true) {
+          alert("codou decimal: " + comando);
+        } else if (hexadecimal == true) {
+          alert("codou hexa: " + comando);
+        } else if (octal == true) {
+          alert("codou oct: " + comando);
+        } else alert("codou nada");
+
+
+
+        
+
+        cmdDiv.innerHTML = "";
+      }
+    });
+  </script>
+</html>
