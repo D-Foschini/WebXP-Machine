@@ -17,6 +17,7 @@
   </body>
   <script>
     const cmdDiv = document.getElementById("div_cmd");
+    const resDiv = document.getElementById("div_result");
 
     cmdDiv.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
@@ -25,24 +26,49 @@
         let decimal = comando.startsWith("dec");
         let hexadecimal = comando.startsWith("hex");
         let octal = comando.startsWith("oct");
+        let binario = comando.startsWith("bin");
+
+        let numero = comando.slice(4, -4);
 
         let decimalfinal = comando.endsWith("dec");
         let hexadecimalfinal = comando.endsWith("hex");
         let octalfinal = comando.endsWith("oct");
+        let binariofinal = comando.endsWith("bin");
 
-        if (decimal == true) {
-          alert("codou decimal: " + comando);
-        } else if (hexadecimal == true) {
-          alert("codou hexa: " + comando);
+        if (hexadecimal == true) {
+          decimalValue = parseInt(numero, 16); // Base 16
         } else if (octal == true) {
-          alert("codou oct: " + comando);
-        } else alert("codou nada");
+          decimalValue = parseInt(numero, 8); // Base 8
+        } else if (binario == true) {
+          decimalValue = parseInt(numero, 2); // Base 2
+        } else if (decimal == true) {
+          decimalValue = parseInt(numero, 10); // Base 10
+        }
 
-
-
-        
+        // verifica se cada opção de conversão está selecionada e adiciona o resultado ao html de saída
+        if (decimalfinal == true) {
+          resDiv.innerHTML += `<p>Decimal: ${decimalValue}</p>`; // adiciona o resultado ao html
+        } else if (hexadecimalfinal == true) {
+          resDiv.innerHTML += `<p>Hexadecimal: ${decimalValue
+            .toString(16)
+            .toUpperCase()}</p>`; // converte para hexadecimal e adiciona ao html
+        } else if (octalfinal == true) {
+          resDiv.innerHTML += `<p>Octal: ${decimalValue.toString(8)}</p>`; // converte para octal e adiciona ao html
+        } else if (binariofinal == true) {
+          resDiv.innerHTML += `<p>Binário: ${decimalValue.toString(2)}</p>`; // converte
+        }
 
         cmdDiv.innerHTML = "";
+
+        
+        decimal == false;
+        hexadecimal == false;
+        octal == false;
+        binario == false;
+        decimalfinal == false;
+        hexadecimalfinal == false;
+        octalfinal == false;
+        binariofinal == false;
       }
     });
   </script>
