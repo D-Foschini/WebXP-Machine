@@ -12,12 +12,13 @@
         C:\Users\danie\FoschiniMachini.html>
         <div class="ipt" id="div_cmd" contenteditable="true"></div>
       </div>
-      <div class="resultado" id="div_result">testando</div>
+      <div class="resultado" id="div_result"></div>
     </div>
   </body>
   <script>
     const cmdDiv = document.getElementById("div_cmd");
     const resDiv = document.getElementById("div_result");
+    var contador = 0;
 
     cmdDiv.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
@@ -28,39 +29,68 @@
         let octal = comando.startsWith("oct");
         let binario = comando.startsWith("bin");
 
-        let numero = comando.slice(4, -4);
-
         let decimalfinal = comando.endsWith("dec");
         let hexadecimalfinal = comando.endsWith("hex");
         let octalfinal = comando.endsWith("oct");
         let binariofinal = comando.endsWith("bin");
 
-        if (hexadecimal == true) {
-          decimalValue = parseInt(numero, 16); // Base 16
-        } else if (octal == true) {
-          decimalValue = parseInt(numero, 8); // Base 8
-        } else if (binario == true) {
-          decimalValue = parseInt(numero, 2); // Base 2
-        } else if (decimal == true) {
-          decimalValue = parseInt(numero, 10); // Base 10
+        let prossegue = false;
+        let outros = false;
+
+        let numero = comando.slice(4, -4);
+
+        if (comando == "help") {
+          outros = true;
+          resDiv.innerHTML += ` <p style="color: lime;">(base atual) (numero) (base a se transformar)<br> clear - limpa os campos <br> quantia - quantidade de comandos`;
+        } else if (comando == "quantia") {
+          outros = true;
+          resDiv.innerHTML += `<p style="color: yellow;"> ue ${contador} `;
+        } else if (comando == "clear") {
+          outros = true;
+          resDiv.innerHTML = ``;
         }
 
+        if (hexadecimal == true) {
+          // verifica se o primeiro digito é valido & converte o numero para diferentes bases
+          decimalValue = parseInt(numero, 16); // Base 16
+          prossegue = true;
+        } else if (octal == true) {
+          decimalValue = parseInt(numero, 8); // Base 8
+          prossegue = true;
+        } else if (binario == true) {
+          decimalValue = parseInt(numero, 2); // Base 2
+          prossegue = true;
+        } else if (decimal == true) {
+          decimalValue = parseInt(numero, 10); // Base 10
+          prossegue = true;
+        } else if (outros == false) {
+          resDiv.innerHTML += `<p style="color: red;">O termo ${comando} não é reconhecido, use o comando "help"`;
+          prossegue = false;
+        }
+
+        console.log(prossegue);
+        console.log(outros);
         // verifica se cada opção de conversão está selecionada e adiciona o resultado ao html de saída
-        if (decimalfinal == true) {
+        if (decimalfinal == true && prossegue == true) {
           resDiv.innerHTML += `<p>Decimal: ${decimalValue}</p>`; // adiciona o resultado ao html
-        } else if (hexadecimalfinal == true) {
+          contador++;
+        } else if (hexadecimalfinal == true && prossegue == true) {
           resDiv.innerHTML += `<p>Hexadecimal: ${decimalValue
             .toString(16)
             .toUpperCase()}</p>`; // converte para hexadecimal e adiciona ao html
-        } else if (octalfinal == true) {
+          contador++;
+        } else if (octalfinal == true && prossegue == true) {
           resDiv.innerHTML += `<p>Octal: ${decimalValue.toString(8)}</p>`; // converte para octal e adiciona ao html
-        } else if (binariofinal == true) {
+          contador++;
+        } else if (binariofinal == true && prossegue == true) {
           resDiv.innerHTML += `<p>Binário: ${decimalValue.toString(2)}</p>`; // converte
+          contador++;
+        } else if (prossegue == true && outros == false) {
+          resDiv.innerHTML += `<p style="color: red;">O termo ${comando} não é reconhecido, use o comando "help"`;
         }
 
         cmdDiv.innerHTML = "";
 
-        
         decimal == false;
         hexadecimal == false;
         octal == false;
@@ -69,6 +99,8 @@
         hexadecimalfinal == false;
         octalfinal == false;
         binariofinal == false;
+        prossegue = true;
+        outro = false;
       }
     });
   </script>
