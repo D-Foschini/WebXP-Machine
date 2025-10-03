@@ -20,18 +20,28 @@ body {
   color: white;
   width: 577px;
   height: 270px;
-  display: flex;    
+  display: flex;
   align-content: flex-start;
   flex-wrap: wrap;
 }
 .top {
-    width: 550px;
-    height: 20px;
-    display: flex;
-    gap: 10px;
+  width: 550px;
+  height: 20px;
+  display: flex;
+  gap: 10px;
 }
 .ipt {
-    width: 500px;
-    height: 250px;
-    outline: none;
+  word-break: break-all;
+  width: 500px;
+  height: 250px;
+  outline: none;
+}
+
+.resultado {
+  max-height: 240px;
+  word-break: break-all;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
